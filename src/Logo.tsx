@@ -21,6 +21,10 @@ export const Logo: React.FC = () => {
 	const wave2 = Math.cos(frame / 15) * 13 + entranceOffset;
 	const wave1 = Math.cos((frame - 5) / 15) * 16 + entranceOffset;
 	const [stargazersCount, setStargazersCount] = useState(0);
+	const scale = spring({
+		fps,
+		frame,
+	});
 	useEffect(() => {
 		fetch('https://api.github.com/repos/flexbox/react-native-bootcamp')
 			.then((response) => response.json())
@@ -35,7 +39,7 @@ export const Logo: React.FC = () => {
 	console.log(stargazersCount);
 	return (
 		<div
-			style={{opacity}}
+			style={{transform: `scale(${scale})`}}
 			className="flex flex-row justify-center align-middle text-center border-2 border-black rounded-xl  px-6 py-4 "
 		>
 			<p className="font-bold m-auto text-3xl">{stargazersCount}</p>
